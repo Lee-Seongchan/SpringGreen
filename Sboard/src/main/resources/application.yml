@@ -1,0 +1,49 @@
+jwt:
+    issuer: lseong96@gmail.com
+    secret: X2m6lZbJ7NURWyX7P36zCxcoAiL1I52u
+logging:
+    file:
+        name: log/Ch11.log
+    level:
+        jdbc:
+            connection: info
+            sqlonly: info
+            sqltiminh: info
+        org:
+            hibernate: info
+            springframework:
+                security: debug
+        resultsettable: info
+        root: info
+server:
+    servlet:
+        context-path: /
+spring:
+    datasource:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        password: Ltjdcks@96
+        url: jdbc:mysql://13.209.73.35:3306/jboard
+        username: root
+    devtools:
+        livereload:
+            enabled: true
+        restart:
+            enabled: true
+    jpa:
+        database: mysql
+        hibernate:
+            ddl-auto: update
+            naming:
+                physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+        properties:
+            hibernate:
+                format_sql: true
+                show_sql: true
+                use_sql_comments: true
+    security:
+        user:
+            name: user
+            password: 1234
+    thymeleaf:
+        cache: false
+        prefix: file:src/main/resources/templates/
