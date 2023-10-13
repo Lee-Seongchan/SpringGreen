@@ -1,7 +1,6 @@
 package kr.co.sboard.entity;
 
 import jakarta.persistence.*;
-import kr.co.sboard.dto.TermsDTO;
 import lombok.*;
 
 @Getter
@@ -11,7 +10,7 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "Terms")
+@Table(name="Terms")
 public class TermsEntity {
 
     @Id
@@ -21,12 +20,5 @@ public class TermsEntity {
     private String privacy;
 
 
-    public TermsDTO toDTO() {
-        return TermsDTO.builder()
-                .no(no)
-                .privacy(privacy)
-                .terms(terms)
-                .build();
-    }
 
 }

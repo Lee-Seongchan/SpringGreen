@@ -13,7 +13,7 @@
     <!-- Bootstrap Core CSS -->
     <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- MetisMenu CSS -->=
+    <!-- MetisMenu CSS -->
     <link href="../vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
@@ -28,35 +28,113 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
 
+        $(function(){
+
+            // 회원가입
+            $('#btnRegister').click(function(e){
+                e.preventDefault();
+
+                $('#form').submit();
+
+            });
+
+            // 아이디 중복체크
+            $('input[name=uid]').focusout(function(){
+                const uid = $(this).val();
+
+                $.ajax({
+                    url: '/user/check/uid/'+uid,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(data){
+                        const labelUid = $('.label-uid');
+                        if(data > 0){
+                            labelUid.parent().removeClass('has-success');
+                            labelUid.parent().addClass('has-error');
+                            labelUid.text('이미 사용 중인 아이디 입니다.');
+                        }else{
+                            labelUid.parent().removeClass('has-error');
+                            labelUid.parent().addClass('has-success');
+                            labelUid.text('사용 가능한 아이디 입니다.');
+                        }
+                    }
+
+                });
+
+            });
+
+
+        });
+
+
+
+
+    </script>
 </head>
 
 <body>
 
     <div class="container">
         <div class="row">
-            <div class="col-md-4 col-md-offset-4">
-                <div class="login-panel panel panel-default">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="page-header panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title">로그인</h3>
+                        <h3 class="panel-title">회원가입</h3>
+                    </div>
                     </div>
                     <div class="panel-body">
-                        <form role="form">
+                        <form id="form" th:action="@{/user/register}" method="post">
                             <fieldset>
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="E-mail" name="email" type="email" autofocus>
+                                    <label class="label-uid control-label">아이디</label>
+                                    <input class="form-control" name="uid">
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="Password" name="password" type="password" value="">
+                                    <label>비밀번호</label>
+                                    <input class="form-control" name="pass1">
                                 </div>
-                                <div class="checkbox">
-                                    <label>
-                                        <input name="remember" type="checkbox" value="Remember Me">Remember Me
-                                    </label>
+                                <div class="form-group">
+                                    <label>비밀번호 확인</label>
+                                    <input class="form-control" name="pass2">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>이름</label>
+                                    <input class="form-control" name="name">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>별명</label>
+                                    <input class="form-control" name="nick">
+                                    <p class="help-block">별명을 입력하세요.</p>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>이메일</label>
+                                    <input class="form-control" name="email">
+                                    <p class="help-block">이메일을 입력하세요.</p>
+                                </div>
+                                <div class="form-group">
+                                    <label>우편번호</label>
+                                    <input class="form-control" name="zip">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>기본주소</label>
+                                    <input class="form-control" name="addr1">
+                                </div>
+                                <div class="form-group">
+                                    <label>상세주소</label>
+                                    <input class="form-control" name="addr2">
                                 </div>
                                 <!-- Change this to a button or input when using this as a form -->
-                                <a th:href="@{/user/login}" class="btn btn-lg btn-success btn-block">로그인</a>
-                                <a th:href="@{/user/terms}" class="btn btn-lg btn-primary btn-block">회원가입</a>
+                                <div class="text-center">
+                                    <a th:href="@{/user/login}" class="btn btn-default">취소</a>
+                                    <a th:href="@{#}" id="btnRegister" class="btn btn-primary">등록</a>
+                                </div>
                             </fieldset>
                         </form>
                     </div>

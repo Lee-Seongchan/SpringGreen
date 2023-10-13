@@ -1,19 +1,16 @@
-jwt:
-    issuer: lseong96@gmail.com
-    secret: X2m6lZbJ7NURWyX7P36zCxcoAiL1I52u
 logging:
     file:
         name: log/Ch11.log
     level:
         jdbc:
             connection: info
+            resultsettable: info
             sqlonly: info
-            sqltiminh: info
+            sqltiming: info
         org:
             hibernate: info
             springframework:
                 security: debug
-        resultsettable: info
         root: info
 server:
     servlet:
@@ -22,17 +19,18 @@ spring:
     datasource:
         driver-class-name: com.mysql.cj.jdbc.Driver
         password: Ltjdcks@96
-        url: jdbc:mysql://13.209.73.35:3306/jboard
+        url: jdbc:mysql://13.209.73.35:3306/Jboard
         username: root
     devtools:
         livereload:
             enabled: true
-        restart:
-            enabled: true
+        remote:
+            restart:
+                enabled: true
     jpa:
         database: mysql
         hibernate:
-            ddl-auto: update
+            ddl-auto: none
             naming:
                 physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
         properties:
@@ -46,4 +44,14 @@ spring:
             password: 1234
     thymeleaf:
         cache: false
-        prefix: file:src/main/resources/templates/
+        # prefix 설정을 안하면 HTML 수정 후 브라우저에서 새로고침 반영안됨
+        # 그리고 반드시 classpath 경로로 쓰고 templates 마지막에 슬래쉬(/) 붙이면 배포파일 실행 안됨
+        #prefix: file:src/main/resources/templates/
+        prefix: classpath:/templates
+
+    servlet:
+        multipart:
+            location: src/main/resources/static/file/
+            max-file-size: 10MB
+
+

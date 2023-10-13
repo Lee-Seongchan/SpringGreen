@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface TermsRepositroy extends JpaRepository<TermsEntity, Integer> {
+public interface TermsRepository extends JpaRepository<TermsEntity, Integer> {
 }
